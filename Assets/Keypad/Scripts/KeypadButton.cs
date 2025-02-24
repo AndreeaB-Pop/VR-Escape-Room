@@ -14,6 +14,10 @@ namespace NavKeypad
         [Header("Component References")]
         [SerializeField] private Keypad keypad;
 
+        public void ButtonPressedOutput()
+        {
+            keypad.AddInput(value);
+        }
 
         public void PressButton()
         {
