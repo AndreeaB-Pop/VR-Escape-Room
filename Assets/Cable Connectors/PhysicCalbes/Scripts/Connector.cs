@@ -96,20 +96,10 @@ namespace HPhysic
                 //secondConnector.Rigidbody.isKinematic = true;
             ConnectedTo = secondConnector;
 
-            Debug.Log("for the sparks, incorrect sparks is " + incorrectSparksC + ". sparks particles is " + sparksParticle + " and is connected right is " + IsConnectedRight + " while is connected is " + IsConnected + " and is connected is " + ConnectedTo);
-
             // sparks on inncretc connection
-            if (incorrectSparksC == null && sparksParticle && !IsConnectedRight)
+            if (incorrectSparksC == null && sparksParticle && IsConnected && !IsConnectedRight)
             {
-                print("incorrect colour combo");
-                incorrectSparksC = IncorrectSparks();
-                StartCoroutine(incorrectSparksC);
-            }
-
-            // sparks on inncretc connection
-            if (incorrectSparksC == null && sparksParticle && !IsConnectedRight)
-            {
-                print("incorrect colour combo");
+                //print("incorrect colour combo");
                 incorrectSparksC = IncorrectSparks();
                 StartCoroutine(incorrectSparksC);
             }

@@ -1,11 +1,9 @@
 using HPhysic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class VRConnectorLogic : MonoBehaviour
 {
     [SerializeField] Connector connector;
-    XRSocketInteractor XRSocket;
     [SerializeField] Connector secondConnector;
 
     private void Start()
@@ -13,10 +11,15 @@ public class VRConnectorLogic : MonoBehaviour
         connector = GetComponentInChildren<Connector>();
     }
 
+    /// <summary>
+    /// Check the connection of the socket and force it to the second connector, then check if the connection is correct to the socket logic brain.
+    /// </summary>
     public void CheckSocketConnector()
     {
+        print("checking socket connection");
         if (secondConnector != null)
         {
+            // Crossed out areas are just for when testing.
             connector.ConnectedTo = secondConnector;
             //secondConnector.ConnectedTo = connector;
             connector.Connect(secondConnector);
@@ -29,20 +32,24 @@ public class VRConnectorLogic : MonoBehaviour
             } else
             {
                 print("it's correct");
+                SocketLogic.AddSocketInside();
             }
+        } else
+        {
+            print("for some reason the second connection is null");
         }
     }
 
     public void Disconnect()
     {
+        SocketLogic.RemoveSocket();
         connector.Disconnect();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Connector")
+        if (!other.CompareTag("Connector"))
         {
-            print("this isn't a connector");
             return;
         }
         else

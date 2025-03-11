@@ -312,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5128321505770509627}
   - component: {fileID: 1113612034846394023}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PhysicCableMM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,11 +1036,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CableContactMale
-      objectReference: {fileID: 0}
-    - target: {fileID: 2441291184268255378, guid: 620b9596c45af7d459cd03cf3528ad57,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3457132163642946136, guid: 620b9596c45af7d459cd03cf3528ad57,
         type: 3}
