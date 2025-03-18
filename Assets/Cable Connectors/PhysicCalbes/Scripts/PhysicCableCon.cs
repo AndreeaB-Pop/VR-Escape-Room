@@ -18,26 +18,41 @@ namespace HPhysic
 
         public override void PickUp(IObjectHolder holder, int layer)
         {
-            base.PickUp(holder, layer);
+            //base.PickUp(holder, layer);
 
-            if (_connector.ConnectedTo)
-                _connector.Disconnect();
+            //if (_connector.ConnectedTo)
+                //_connector.Disconnect();
+        }
+
+        public void PickUpVR()
+        {
+            //if (_connector.ConnectedTo)
+                //_connector.Disconnect();
         }
 
         public override void Drop()
         {
-            if (ObjectHolder.SelectedObject && ObjectHolder.SelectedObject.TryGetComponent(out Connector secondConnector))
-            {
-                if (_connector.CanConnect(secondConnector))
-                    secondConnector.Connect(_connector);
-                else if (!secondConnector.IsConnected)
-                {
-                    transform.rotation = secondConnector.ConnectionRotation * _connector.RotationOffset;
-                    transform.position = (secondConnector.ConnectionPosition + secondConnector.ConnectedOutOffset * 0.2f) - (_connector.ConnectionPosition - _connector.transform.position);
-                }
-            }
+            //if (ObjectHolder.SelectedObject && ObjectHolder.SelectedObject.TryGetComponent(out Connector secondConnector))
+            //{
+            //    if (_connector.CanConnect(secondConnector))
+            //        secondConnector.Connect(_connector);
+            //    else if (!secondConnector.IsConnected)
+            //    {
+            //        transform.rotation = secondConnector.ConnectionRotation * _connector.RotationOffset;
+            //        transform.position = (secondConnector.ConnectionPosition + secondConnector.ConnectedOutOffset * 0.2f) - (_connector.ConnectionPosition - _connector.transform.position);
+            //    }
+            //}
 
-            base.Drop();
+            //base.Drop();
+        }
+
+        public void DropVR()
+        {
+            //if(TryGetComponent(out Connector secondConnector))
+            //{
+            //    if (_connector.CanConnect(secondConnector))
+            //        secondConnector.Connect(_connector);
+            //}
         }
     }
 }
