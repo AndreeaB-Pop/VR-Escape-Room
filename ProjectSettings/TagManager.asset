@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Connector
   - Destroyer
+  - Object Respawn
   layers:
   - Default
   - TransparentFX

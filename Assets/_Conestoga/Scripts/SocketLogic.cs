@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,13 +16,18 @@ public class SocketLogic : MonoBehaviour
     [Header("Lights")]
     public Light roomLight1, roomLight2, roomLight3;
 
-    public bool elevatorPuzzle;
-
     int rightSocketsFilled = 0;
-    [SerializeField] int rightSocketsMax = 2;
-    [SerializeField] int elevatorConnectionEscape = 3;
+    int rightSocketsMax;
+    [SerializeField] int generatorPuzzleConnectionAmount = 2;
+    [SerializeField] int elevatorPuzzleConnectionAmount = 3;
 
-    [SerializeField] bool correctSocket = false;
+    [SerializeField]
+    public enum Puzzle
+    {
+        Generator,
+        Elevator
+    }
+    public Puzzle activeConnectorPuzzle;
 
     string activeScene;
 
@@ -41,68 +48,88 @@ public class SocketLogic : MonoBehaviour
     {
         activeScene = SceneManager.GetActiveScene().name;
         changeScene = GetComponent<ChangeScene>();
+        activeConnectorPuzzle = Puzzle.Generator;
+    }
+
+    private void Update()
+    {
+        CheckSocketsCorrect();
     }
 
     // This is so so messy and needs to be redone to not have a bajillion variations on the same function. Use case switches or what not.
-    public void AddSocketIn()
+    private void AddSocketIn()
     {
-        print("add one socket inside");
         rightSocketsFilled++;
-        if (!elevatorPuzzle)
-        {
-            CheckSocketsCorrect();
-        }
-        else
-        {
-            CheckSocketsElevator();
-        }
+        CheckSocketsCorrect();
     }
 
     public static void AddSocketInside() => singleton?.AddSocketIn();
 
-    public void RemoveSocketOut()
+    void RemoveSocketOut()
     {
         print("remove socket");
         if (rightSocketsFilled > 0) rightSocketsFilled--;
+
+        // If somehow this goes under 0, fix back to 0.
+        if (rightSocketsFilled < 0) rightSocketsFilled = 0;
     }
 
     public static void RemoveSocket() => singleton?.RemoveSocketOut();
 
+    public void ResetSocketCount()
+    {
+        rightSocketsFilled = 0;
+    }
+
+    public void ChangePuzzleType(string newState)
+    {
+        activeConnectorPuzzle = (Puzzle)Enum.Parse(typeof(Puzzle), newState);
+    }
+
     public void CheckSocketsCorrect()
     {
+        switch (activeConnectorPuzzle)
+        {
+            case Puzzle.Generator:
+                rightSocketsMax = generatorPuzzleConnectionAmount;
+                break;
+            case Puzzle.Elevator:
+                rightSocketsMax = elevatorPuzzleConnectionAmount;
+                break;
+        }
+
+        Debug.Log("the max of the puzzle amount is " + rightSocketsMax + " and the current case is " + activeConnectorPuzzle);
+
         if (rightSocketsFilled == rightSocketsMax)
         {
+            switch (activeConnectorPuzzle)
+            {
+                case Puzzle.Generator:
+                    Debug.Log("do generator resolution things");
+                    // Enable lights
+                    roomLight1.enabled = true;
+                    roomLight2.enabled = true;
+                    roomLight3.enabled = true;
+                    break;
+                case Puzzle.Elevator:
+                    Debug.Log("do elevator resoltuion things");
+                    break;
+            }
+
             Debug.Log("yay correct password");
 
-            // Door Logic Active
-            door.SetActive(false);
-            vent.SetActive(false);
-            doorLock.SetActive(false);
-            boxes.SetActive(true);
+            ResetSocketCount();
 
-            // Lights on
-            roomLight1.enabled = true;
-            roomLight2.enabled = true;
-            roomLight3.enabled = true;
-            rightSocketsFilled = 0;
+            //// Door Logic Active
+            //door.SetActive(false);
+            //vent.SetActive(false);
+            //doorLock.SetActive(false);
+            //boxes.SetActive(true);
+
         }
         else
         {
             Debug.Log("aww wrong match");
-        }
-    }
-
-    public void CheckSocketsElevator()
-    {
-        if (rightSocketsFilled == elevatorConnectionEscape)
-        {
-            Debug.Log("yay correct combo for elevator");
-            
-            StartCoroutine(FadeSceneChange(activeScene));
-        }
-        else
-        {
-            Debug.Log("aww wrong match for elevator");
         }
     }
 
