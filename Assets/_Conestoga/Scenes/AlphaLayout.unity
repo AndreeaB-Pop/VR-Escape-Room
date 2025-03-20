@@ -794,6 +794,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 66355737}
+    - targetCorrespondingSourceObject: {fileID: 1002705123656268, guid: d86ca2f4159e6a942abd8dfc52b38395,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 66355738}
     - targetCorrespondingSourceObject: {fileID: 1175331865632600, guid: d86ca2f4159e6a942abd8dfc52b38395,
         type: 3}
       insertIndex: -1
@@ -897,9 +901,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 66355738}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: HeldInHand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 66355738}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: SetOriginalMaterial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 66355738}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: DroppedFromHand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1101,6 +1141,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17882d57b8ff0f4f94779a610ef51b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &66355738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66355723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab679c4f24e05046a2eee2056782e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: ba6854f4a442bc04eadab8c7d18abb09, type: 2}
+  heldInHand: 0
 --- !u!1 &87601211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,10 +2174,46 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 173649874}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: HeldInHand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 173649874}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: SetOriginalMaterial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 173649874}
+        m_TargetAssemblyTypeName: HighlightOnHover, Assembly-CSharp
+        m_MethodName: DroppedFromHand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -2261,6 +2351,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17882d57b8ff0f4f94779a610ef51b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &173649874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173649862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab679c4f24e05046a2eee2056782e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: ba6854f4a442bc04eadab8c7d18abb09, type: 2}
+  heldInHand: 0
 --- !u!1 &197052927 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1502877291743220047, guid: e21ca26e5c28748438665487f6aac7dd,
@@ -4704,6 +4808,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 173649873}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: c56b9df7cee41024aaf65cae7565754f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173649874}
   m_SourcePrefab: {fileID: 100100000, guid: c56b9df7cee41024aaf65cae7565754f, type: 3}
 --- !u!1 &469736254
 GameObject:
@@ -8144,7 +8252,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8510,7 +8618,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -8656,7 +8764,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: -0.02, z: 0}
   m_Axis: {x: 1, y: 0, z: 100}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.89081335, y: 0.0000000018626451, z: 4.089939}
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -8672,8 +8780,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 123.04463
-    max: 271.0213
+    min: -180
+    max: 0
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -14817,28 +14925,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1573155571}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1361589096
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361589092}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1615947861177026604, guid: 9864c2ae2fccaab4c8a078851859300f, type: 3}
 --- !u!95 &1361589097
 Animator:
   serializedVersion: 5
@@ -14860,6 +14946,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1361589098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361589092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8947644, y: 0.11, z: 1.9999998}
+  m_Center: {x: -0.4395973, y: 0.021133183, z: 0.9999999}
 --- !u!1001 &1372440035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16968,10 +17075,60 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -985360212305081488, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413920774732939033, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9864c2ae2fccaab4c8a078851859300f,
         type: 3}
       propertyPath: m_Name
       value: Escape room enviornmnet v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247059566315273222, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658815681315225863, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153670345480038512, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366999902005864902, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366999902005864902, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366999902005864902, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366999902005864902, guid: 9864c2ae2fccaab4c8a078851859300f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17012,11 +17169,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6153670345480038512, guid: 9864c2ae2fccaab4c8a078851859300f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1361589096}
+      addedObject: {fileID: 1361589097}
     - targetCorrespondingSourceObject: {fileID: 6153670345480038512, guid: 9864c2ae2fccaab4c8a078851859300f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1361589097}
+      addedObject: {fileID: 1361589098}
     - targetCorrespondingSourceObject: {fileID: 4658815681315225863, guid: 9864c2ae2fccaab4c8a078851859300f,
         type: 3}
       insertIndex: -1

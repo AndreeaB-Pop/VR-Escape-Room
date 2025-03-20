@@ -9,6 +9,8 @@ public class HighlightOnHover : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Material originalMaterial;
 
+    public bool heldInHand;
+
     void Start()
     {
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -19,7 +21,31 @@ public class HighlightOnHover : MonoBehaviour
         grabInteractable.hoverExited.AddListener(StopHighlight);
     }
 
-    public void StartHighlight(HoverEnterEventArgs _) => meshRenderer.sharedMaterial = highlightMaterial;
+    void StartGlow()
+    {
+        if (!heldInHand)
+        {
+            meshRenderer.sharedMaterial = highlightMaterial;
+        }
+        else
+        {
+            meshRenderer.sharedMaterial = originalMaterial;
+        }
+    }
+
+    public void HeldInHand()
+    {
+        heldInHand = true;
+    }
+
+    public void DroppedFromHand()
+    {
+        heldInHand = false;
+    }
+
+    public void StartHighlight(HoverEnterEventArgs _) => StartGlow();
 
     public void StopHighlight(HoverExitEventArgs _) => meshRenderer.sharedMaterial = originalMaterial;
+
+    public void SetOriginalMaterial() => meshRenderer.sharedMaterial = originalMaterial;
 }
