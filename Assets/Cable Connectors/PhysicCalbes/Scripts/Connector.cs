@@ -29,8 +29,9 @@ namespace HPhysic
         [SerializeField] private MeshRenderer collorRenderer;
         [SerializeField] private Renderer colourRenderer;
         [SerializeField] private ParticleSystem sparksParticle;
+        [SerializeField] private AudioClip sparksSFX;
 
-
+        private AudioSource audioSource;
         private FixedJoint _fixedJoint;
         public Rigidbody Rigidbody { get; private set; }
 
@@ -47,6 +48,8 @@ namespace HPhysic
         private void Awake()
         {
             Rigidbody = gameObject.GetComponent<Rigidbody>();
+            audioSource = gameObject.GetComponent<AudioSource>();
+            if (audioSource != null) audioSource.clip = sparksSFX;
         }
 
         private void Start()
@@ -71,7 +74,7 @@ namespace HPhysic
         }
         public void Connect(Connector secondConnector)
         {
-            print("initiate connect script off connector from the game object " + gameObject.name);
+            // print("initiate connect script off connector from the game object " + gameObject.name);
             if (secondConnector == null)
             {
                 Debug.LogWarning("Attempt to connect null");
@@ -81,7 +84,7 @@ namespace HPhysic
             if (IsConnected)
             {
                 //Disconnect(secondConnector);
-                print("disconnecting from an already connected thing");
+                // print("disconnecting from an already connected thing");
             }    
 
             //secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
@@ -97,7 +100,7 @@ namespace HPhysic
             ConnectedTo = secondConnector;
 
             // sparks on inncretc connection
-            if (incorrectSparksC == null && sparksParticle && IsConnected && !IsConnectedRight)
+            if (incorrectSparksC == null && sparksParticle && IsConnected && !IsConnectedRight && sparksSFX)
             {
                 //print("incorrect colour combo");
                 incorrectSparksC = IncorrectSparks();
@@ -122,9 +125,10 @@ namespace HPhysic
             toDisconect.Disconnect(this);
 
             // sparks on inncretc connection
-            if (sparksParticle)
+            if (sparksParticle && sparksSFX)
             {
                 sparksParticle.Stop();
+                audioSource.Stop();
                 sparksParticle.Clear();
             }
 
@@ -145,9 +149,10 @@ namespace HPhysic
         private IEnumerator incorrectSparksC;
         private IEnumerator IncorrectSparks()
         {
-            while (incorrectSparksC != null && sparksParticle && IsConnected && !IsConnectedRight)
+            while (incorrectSparksC != null && sparksParticle && IsConnected && !IsConnectedRight && sparksSFX)
             {
                 sparksParticle.Play();
+                audioSource.Play();
 
                 yield return new WaitForSeconds(Random.Range(0.6f, 0.8f));
             }

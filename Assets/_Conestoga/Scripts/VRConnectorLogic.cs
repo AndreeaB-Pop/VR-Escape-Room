@@ -36,7 +36,7 @@ public class VRConnectorLogic : MonoBehaviour
             }
         } else
         {
-            print("for some reason the second connection is null");
+            // do nothing
         }
     }
 

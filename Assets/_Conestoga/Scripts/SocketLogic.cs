@@ -1,12 +1,20 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
+/// <summary>
+/// It's called socket logic but it handles most of the game logic overall.
+/// </summary>
 public class SocketLogic : MonoBehaviour
 {
     public static SocketLogic singleton = null;
+    PlayableDirector playableDirector;
+    [SerializeField] TimelineAsset elevatorDirectorClip;
 
     ChangeScene changeScene;
 
@@ -16,11 +24,11 @@ public class SocketLogic : MonoBehaviour
     [Header("Lights")]
     public Light roomLight1, roomLight2, roomLight3;
 
-    int rightSocketsFilled = 0;
-    int rightSocketsMax;
+    [Header("Puzzle Logics")]
+    [Tooltip("Amount of sockets correctly needed for generator puzzle.")]
     [SerializeField] int generatorPuzzleConnectionAmount = 2;
+    [Tooltip("Amount of sockets correctly needed for elevator puzzle.")]
     [SerializeField] int elevatorPuzzleConnectionAmount = 3;
-
     [SerializeField]
     public enum Puzzle
     {
@@ -28,6 +36,9 @@ public class SocketLogic : MonoBehaviour
         Elevator
     }
     public Puzzle activeConnectorPuzzle;
+    // only temporarily exposed, should not be exposed normally OR be only read-only
+    [SerializeField] int rightSocketsFilled = 0;
+    int rightSocketsMax;
 
     string activeScene;
 
@@ -48,15 +59,25 @@ public class SocketLogic : MonoBehaviour
     {
         activeScene = SceneManager.GetActiveScene().name;
         changeScene = GetComponent<ChangeScene>();
+
+        // Set puzzle logic to generator since it's the first puzzle done.
         activeConnectorPuzzle = Puzzle.Generator;
+
+        playableDirector = GetComponent<PlayableDirector>();
+
+        SetPuzzleSocketMaxAmount();
     }
 
     private void Update()
     {
+        // only for testing
         CheckSocketsCorrect();
     }
 
-    // This is so so messy and needs to be redone to not have a bajillion variations on the same function. Use case switches or what not.
+    #region Socket_Logic
+    /// <summary>
+    /// Add a socket counter in, and subsequently check if the max amount is hit to resolve the puzzle.
+    /// </summary>
     private void AddSocketIn()
     {
         rightSocketsFilled++;
@@ -65,6 +86,9 @@ public class SocketLogic : MonoBehaviour
 
     public static void AddSocketInside() => singleton?.AddSocketIn();
 
+    /// <summary>
+    /// Remove active socket when socket is removed. Ensure it doesn't go under zero at any point.
+    /// </summary>
     void RemoveSocketOut()
     {
         print("remove socket");
@@ -76,18 +100,27 @@ public class SocketLogic : MonoBehaviour
 
     public static void RemoveSocket() => singleton?.RemoveSocketOut();
 
+    /// <summary>
+    /// Reset socket count to zero.
+    /// </summary>
     public void ResetSocketCount()
     {
         rightSocketsFilled = 0;
     }
 
+    /// <summary>
+    /// Change puzzle type to a different puzzle, adjust max amount when changing puzzle type too.
+    /// </summary>
+    /// <param name="newState">Name of the puzzle, *MUST* match the enum name of the puzzle.</param>
     public void ChangePuzzleType(string newState)
     {
         activeConnectorPuzzle = (Puzzle)Enum.Parse(typeof(Puzzle), newState);
+        SetPuzzleSocketMaxAmount();
     }
 
-    public void CheckSocketsCorrect()
+    void SetPuzzleSocketMaxAmount()
     {
+        // Change the amount of max sockets needed based on the puzzle count.
         switch (activeConnectorPuzzle)
         {
             case Puzzle.Generator:
@@ -98,46 +131,52 @@ public class SocketLogic : MonoBehaviour
                 break;
         }
 
-        Debug.Log("the max of the puzzle amount is " + rightSocketsMax + " and the current case is " + activeConnectorPuzzle);
+        // Debug.Log("The max of the puzzle sockets is " + rightSocketsMax + " and the current puzzle state is " + activeConnectorPuzzle + ".");
+    }
 
+    public void CheckSocketsCorrect()
+    {
+        // If the current number of sockets filled matches the max variable, resolve the puzzle based on which it is, otherwise do nothing.
         if (rightSocketsFilled == rightSocketsMax)
         {
+            // Check resolution based off puzzle, then reset socket count.
             switch (activeConnectorPuzzle)
             {
                 case Puzzle.Generator:
                     Debug.Log("do generator resolution things");
-                    // Enable lights
-                    roomLight1.enabled = true;
-                    roomLight2.enabled = true;
-                    roomLight3.enabled = true;
+                    playableDirector.Play();
                     break;
                 case Puzzle.Elevator:
-                    Debug.Log("do elevator resoltuion things");
+                    // Debug.Log("do elevator resoltuion things");
                     break;
             }
-
-            Debug.Log("yay correct password");
-
             ResetSocketCount();
-
-            //// Door Logic Active
-            //door.SetActive(false);
-            //vent.SetActive(false);
-            //doorLock.SetActive(false);
-            //boxes.SetActive(true);
-
         }
         else
         {
-            Debug.Log("aww wrong match");
+            // do nothing
         }
     }
+    #endregion 
 
     public IEnumerator FadeSceneChange(string sceneName)
     {
         Fader.FadeOut();
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
+    }
+
+    // Probs could find a cleaner version or where you just input the timeline
+    public void ChangeTimelineClipElevator()
+    {
+        //playableDirector.playableAsset = elevatorDirectorClip;
+        //timeline = playableDirector.playableAsset as TimelineAsset;
+
+        playableDirector.playableAsset = elevatorDirectorClip;
+        playableDirector.RebuildGraph();
+        playableDirector.time = 0.0;
+        playableDirector.Play();
+
     }
 
 }
