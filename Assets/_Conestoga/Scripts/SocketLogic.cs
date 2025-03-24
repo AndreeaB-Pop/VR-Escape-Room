@@ -71,7 +71,7 @@ public class SocketLogic : MonoBehaviour
     private void Update()
     {
         // only for testing
-        CheckSocketsCorrect();
+        // CheckSocketsCorrect();
     }
 
     #region Socket_Logic

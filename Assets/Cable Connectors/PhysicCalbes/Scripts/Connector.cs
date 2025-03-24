@@ -1,6 +1,7 @@
+using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
-using NaughtyAttributes;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace HPhysic
 {
@@ -30,6 +31,8 @@ namespace HPhysic
         [SerializeField] private Renderer colourRenderer;
         [SerializeField] private ParticleSystem sparksParticle;
         [SerializeField] private AudioClip sparksSFX;
+        [SerializeField] private BoxCollider _boxCollider;
+        [SerializeField] private XRGrabInteractable sphereHandle;
 
         private AudioSource audioSource;
         private FixedJoint _fixedJoint;
@@ -69,9 +72,10 @@ namespace HPhysic
         public void SetAsConnectedTo(Connector secondConnector)
         {
             ConnectedTo = secondConnector;
-            //_wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
+            // _wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
             UpdateInteractableWhenIsConnected();
         }
+
         public void Connect(Connector secondConnector)
         {
             // print("initiate connect script off connector from the game object " + gameObject.name);
@@ -85,24 +89,28 @@ namespace HPhysic
             {
                 //Disconnect(secondConnector);
                 // print("disconnecting from an already connected thing");
-            }    
+            }
 
+            // LEAVE THIS OFF
             //secondConnector.transform.rotation = ConnectionRotation * secondConnector.RotationOffset;
             //secondConnector.transform.position = ConnectionPosition - (secondConnector.ConnectionPosition - secondConnector.transform.position);
 
-            _fixedJoint = gameObject.AddComponent<FixedJoint>();
-            _fixedJoint.connectedBody = secondConnector.Rigidbody;
+            // TESTING RN
+            //_fixedJoint = gameObject.AddComponent<FixedJoint>();
+            //_fixedJoint.connectedBody = secondConnector.Rigidbody;
 
             secondConnector.SetAsConnectedTo(this);
-            //_wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
+            // _wasConnectionKinematic = secondConnector.Rigidbody.isKinematic;
             if (makeConnectionKinematic)
-                //secondConnector.Rigidbody.isKinematic = true;
-            ConnectedTo = secondConnector;
+            {
+                // secondConnector.Rigidbody.isKinematic = true;
+                // ConnectedTo = secondConnector;
+            }
 
             // sparks on inncretc connection
             if (incorrectSparksC == null && sparksParticle && IsConnected && !IsConnectedRight && sparksSFX)
             {
-                //print("incorrect colour combo");
+                print("incorrect colour combo, initiate sparks");
                 incorrectSparksC = IncorrectSparks();
                 StartCoroutine(incorrectSparksC);
             }
@@ -121,8 +129,8 @@ namespace HPhysic
             Connector toDisconect = ConnectedTo;
             ConnectedTo = null;
             if (makeConnectionKinematic)
-                //toDisconect.Rigidbody.isKinematic = _wasConnectionKinematic;
-            toDisconect.Disconnect(this);
+                // toDisconect.Rigidbody.isKinematic = _wasConnectionKinematic;
+                toDisconect.Disconnect(this);
 
             // sparks on inncretc connection
             if (sparksParticle && sparksSFX)
@@ -133,7 +141,7 @@ namespace HPhysic
             }
 
             // enable outline on select
-            UpdateInteractableWhenIsConnected();
+            // UpdateInteractableWhenIsConnected();
         }
 
         private void UpdateInteractableWhenIsConnected()

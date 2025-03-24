@@ -19,16 +19,12 @@ public class VRConnectorLogic : MonoBehaviour
         print("checking socket connection");
         if (secondConnector != null)
         {
-            // Crossed out areas are just for when testing.
             connector.ConnectedTo = secondConnector;
-            //secondConnector.ConnectedTo = connector;
             connector.Connect(secondConnector);
-            //secondConnector.Connect(connector);
-            //connector.SetConnectionToTrue();
 
             if (connector.IsConnectedRight == false)
             {
-                print("incorrect combo");
+                //print("incorrect combo");
             } else
             {
                 print("it's correct");
