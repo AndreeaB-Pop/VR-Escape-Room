@@ -7295,7 +7295,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ModelPrefab
       value: 
-      objectReference: {fileID: 5686134208185136530, guid: d2121c8d819597349ac6f3e6043fa1f3,
+      objectReference: {fileID: 3621981467535291324, guid: ddc38db09f9124241b4b4e9b2b9831eb,
         type: 3}
     - target: {fileID: 9014170783705847993, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
@@ -7316,7 +7316,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ModelPrefab
       value: 
-      objectReference: {fileID: 109434732395451517, guid: 7811abe38615a86438f679bcf79f5b92,
+      objectReference: {fileID: 3621981467535291324, guid: 6c2509c76b281144cb0099fc45f17a09,
         type: 3}
     - target: {fileID: 9014170785475729497, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
