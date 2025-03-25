@@ -3,7 +3,77 @@ guid: d6aba9103efd02a42b17ffb6065fdd04
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Elevator_Elevator cart
+    second: {fileID: 2100000, guid: 07302a56c019e584d9cf7021d9ec0304, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_Door
+    second: {fileID: 2100000, guid: 78eef6fa16f7a1341b5257b4e3fcb146, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_Ventalation
+    second: {fileID: 2100000, guid: 9413d2413cdcb17409fcff9f5491e0b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_light
+    second: {fileID: 2100000, guid: 056d9b0f0b120044896041601c3d1125, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Generator_walls, ceiling, ground
+    second: {fileID: 2100000, guid: 04cb27038611a6c4ea751205dc1e1369, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Big Pipes
+    second: {fileID: 2100000, guid: 797e9d63dfb91d3478445cb3da31e503, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_DebrisDirt
+    second: {fileID: 2100000, guid: 7a4cf18d120bb134bb4deb2e938e5172, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Elevator Frames
+    second: {fileID: 2100000, guid: d13e839e7efcf794986e3ae5b7c15d2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Lights
+    second: {fileID: 2100000, guid: c809d3da8eb02cf43b1f2f7d208365a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Mailboxes
+    second: {fileID: 2100000, guid: 2e8c3633b838e8449b3becae16fe1fb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Small Pipes
+    second: {fileID: 2100000, guid: 6aac9f4cf048efa458739f2bbb8088de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Staircase
+    second: {fileID: 2100000, guid: b6118c3e7f54c7949bdf62ca4034610f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Vents
+    second: {fileID: 2100000, guid: 471c17e66bf1c774c972cd10e9b35726, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hallway_Wall, ground, ceiling
+    second: {fileID: 2100000, guid: 8215a3bb7cf0505439549c16ded360bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -16,14 +16,6 @@ public class SocketLogic : MonoBehaviour
     PlayableDirector playableDirector;
     [SerializeField] TimelineAsset elevatorDirectorClip;
 
-    ChangeScene changeScene;
-
-    [Header("Door Spawns")]
-    public GameObject door, vent, doorLock, boxes;
-
-    [Header("Lights")]
-    public Light roomLight1, roomLight2, roomLight3;
-
     [Header("Puzzle Logics")]
     [Tooltip("Amount of sockets correctly needed for generator puzzle.")]
     [SerializeField] int generatorPuzzleConnectionAmount = 2;
@@ -36,8 +28,7 @@ public class SocketLogic : MonoBehaviour
         Elevator
     }
     public Puzzle activeConnectorPuzzle;
-    // only temporarily exposed, should not be exposed normally OR be only read-only
-    [SerializeField] int rightSocketsFilled = 0;
+    int rightSocketsFilled = 0;
     int rightSocketsMax;
 
     string activeScene;
@@ -58,7 +49,6 @@ public class SocketLogic : MonoBehaviour
     private void Start()
     {
         activeScene = SceneManager.GetActiveScene().name;
-        changeScene = GetComponent<ChangeScene>();
 
         // Set puzzle logic to generator since it's the first puzzle done.
         activeConnectorPuzzle = Puzzle.Generator;
@@ -148,6 +138,7 @@ public class SocketLogic : MonoBehaviour
                     break;
                 case Puzzle.Elevator:
                     // Debug.Log("do elevator resoltuion things");
+                    // probs just set a button to be usable which then triggers the end script + reset
                     break;
             }
             ResetSocketCount();
