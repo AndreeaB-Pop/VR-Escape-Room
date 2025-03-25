@@ -11,7 +11,6 @@ public class ChangeScene : MonoBehaviour
     public void ChangeToSpecificScene(string sceneName)
     {
         StartCoroutine(FadeSceneChange(sceneName));
-        //SceneManager.LoadScene(sceneName);
     }
 
     public IEnumerator FadeSceneChange(string sceneName)
@@ -20,8 +19,28 @@ public class ChangeScene : MonoBehaviour
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
     }
+
+    public IEnumerator FadeSceneChangeWithTimer(string sceneName, float time)
+    {
+        Fader.FadeOut(time);
+        while (Fader.isFading) yield return null; // wait until fade is complete
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void ChangeToSpecificSceneNonFade(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGameNow()
+    {
+        StartCoroutine(QuitGame());
+    }
+
+    public IEnumerator QuitGame()
+    {
+        Fader.FadeOut();
+        while (Fader.isFading) yield return null; // wait until fade is complete
+        Application.Quit();
     }
 }

@@ -24,10 +24,9 @@ public class VRConnectorLogic : MonoBehaviour
 
             if (connector.IsConnectedRight == false)
             {
-                //print("incorrect combo");
+                
             } else
             {
-                print("it's correct");
                 SocketLogic.AddSocketInside();
             }
         } else

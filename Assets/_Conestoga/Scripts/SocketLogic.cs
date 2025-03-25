@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
 
 /// <summary>
 /// It's called socket logic but it handles most of the game logic overall.
@@ -13,8 +10,9 @@ using UnityEngine.Timeline;
 public class SocketLogic : MonoBehaviour
 {
     public static SocketLogic singleton = null;
-    PlayableDirector playableDirector;
-    [SerializeField] TimelineAsset elevatorDirectorClip;
+
+    [SerializeField] ParticleSystem[] particleSystems;
+    [SerializeField] AudioSource[] fireSources;
 
     [Header("Puzzle Logics")]
     [Tooltip("Amount of sockets correctly needed for generator puzzle.")]
@@ -30,8 +28,15 @@ public class SocketLogic : MonoBehaviour
     public Puzzle activeConnectorPuzzle;
     int rightSocketsFilled = 0;
     int rightSocketsMax;
+    PlayableDirector playableDirector;
 
     string activeScene;
+
+    [SerializeField] AudioSource playerAudio;
+    [SerializeField] AudioClip colourHint, keypadHint1, keypadhint2, gameWin;
+    bool hintGiven;
+    bool keypadHint1Given;
+    bool keypadHint2Given; 
 
     // Set singleton
     private void Awake()
@@ -49,19 +54,12 @@ public class SocketLogic : MonoBehaviour
     private void Start()
     {
         activeScene = SceneManager.GetActiveScene().name;
-
+        playableDirector = GetComponent<PlayableDirector>();
         // Set puzzle logic to generator since it's the first puzzle done.
         activeConnectorPuzzle = Puzzle.Generator;
 
-        playableDirector = GetComponent<PlayableDirector>();
-
         SetPuzzleSocketMaxAmount();
-    }
-
-    private void Update()
-    {
-        // only for testing
-        // CheckSocketsCorrect();
+        DisableFires();
     }
 
     #region Socket_Logic
@@ -71,7 +69,15 @@ public class SocketLogic : MonoBehaviour
     private void AddSocketIn()
     {
         rightSocketsFilled++;
-        CheckSocketsCorrect();
+        switch (activeConnectorPuzzle)
+        {
+            case Puzzle.Generator:
+                CheckSocketsCorrect();
+                break;
+            case Puzzle.Elevator:
+                // do nothing, the logic will run on the button press
+                break;
+        }
     }
 
     public static void AddSocketInside() => singleton?.AddSocketIn();
@@ -137,8 +143,10 @@ public class SocketLogic : MonoBehaviour
                     playableDirector.Play();
                     break;
                 case Puzzle.Elevator:
-                    // Debug.Log("do elevator resoltuion things");
-                    // probs just set a button to be usable which then triggers the end script + reset
+                    Debug.Log("do elevator resolution things");
+                    StartCoroutine(FadeSceneChangeWithTimer("AlphaLayout", 5));
+                    playerAudio.clip = gameWin;
+                    playerAudio.Play();
                     break;
             }
             ResetSocketCount();
@@ -148,26 +156,67 @@ public class SocketLogic : MonoBehaviour
             // do nothing
         }
     }
+
+    public void GivePlayerHintColour()
+    {
+        if (!hintGiven) {
+            playerAudio.clip = colourHint;
+            playerAudio.Play();
+            hintGiven = true;
+        }
+    }
+
+    public void GivePlayerKeypadHint()
+    {
+        // lazy way to go about it, could be cleaned up
+        if (!keypadHint1Given)
+        {
+            playerAudio.clip = keypadHint1;
+            playerAudio.Play();
+            keypadHint1Given = true;
+            return;
+        }
+        else if (keypadHint1Given && !keypadHint2Given)
+        {
+            playerAudio.clip = keypadhint2;
+            playerAudio.Play();
+            keypadHint2Given = true;
+            return;
+        } else
+        {
+            // do nothing at this point
+        }
+    }
     #endregion 
 
-    public IEnumerator FadeSceneChange(string sceneName)
+    /// <summary>
+    /// Disable fires at the beginning of the game.
+    /// </summary>
+    public void DisableFires()
     {
-        Fader.FadeOut();
+        foreach (var particleSystem in particleSystems)
+            particleSystem.Stop();
+    }
+
+    /// <summary>
+    /// Enable the fire particle effects + the audio associated with them.
+    /// </summary>
+    public void EnableFires()
+    {
+        foreach (var particleSystem in particleSystems)
+        {
+            particleSystem.Play();
+        }
+        foreach (var fireSource in fireSources)
+        {
+            fireSource.Play();
+        }
+    }
+
+    public IEnumerator FadeSceneChangeWithTimer(string sceneName, float time)
+    {
+        Fader.FadeOut(time);
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
     }
-
-    // Probs could find a cleaner version or where you just input the timeline
-    public void ChangeTimelineClipElevator()
-    {
-        //playableDirector.playableAsset = elevatorDirectorClip;
-        //timeline = playableDirector.playableAsset as TimelineAsset;
-
-        playableDirector.playableAsset = elevatorDirectorClip;
-        playableDirector.RebuildGraph();
-        playableDirector.time = 0.0;
-        playableDirector.Play();
-
-    }
-
 }
