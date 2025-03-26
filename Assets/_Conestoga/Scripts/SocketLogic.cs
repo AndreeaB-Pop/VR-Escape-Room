@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -11,8 +12,23 @@ public class SocketLogic : MonoBehaviour
 {
     public static SocketLogic singleton = null;
 
+    [Header("Enabling Systems")]
     [SerializeField] ParticleSystem[] particleSystems;
     [SerializeField] AudioSource[] fireSources;
+
+    public enum GameDifficulty
+    {
+        Easy,
+        Hard
+    }
+    [Header("Difficulty")]
+    public GameDifficulty gameDifficulty;
+
+    [Header("Difficulty Objects")]
+    [SerializeField]
+    GameObject[] easyObjects;
+    [SerializeField]
+    GameObject[] hardObjects;
 
     [Header("Puzzle Logics")]
     [Tooltip("Amount of sockets correctly needed for generator puzzle.")]
@@ -60,6 +76,28 @@ public class SocketLogic : MonoBehaviour
 
         SetPuzzleSocketMaxAmount();
         DisableFires();
+
+        switch (gameDifficulty)
+        {
+            case GameDifficulty.Easy:
+                foreach (var gameObject in easyObjects)
+                    gameObject.SetActive(true);
+                foreach (var gameObject in hardObjects)
+                    gameObject.SetActive(false);
+                break;
+            case GameDifficulty.Hard:
+                foreach (var gameObject in easyObjects)
+                    gameObject.SetActive(false);
+                foreach (var gameObject in hardObjects)
+                    gameObject.SetActive(true);
+                break;
+        }
+    }
+
+    public void ChangeDifficultyType(string newState)
+    {
+        gameDifficulty = (GameDifficulty)Enum.Parse(typeof(GameDifficulty), newState);
+        StartCoroutine(FadeSceneChangeWithTimer("AlphaLayout"));
     }
 
     #region Socket_Logic
@@ -184,11 +222,13 @@ public class SocketLogic : MonoBehaviour
             return;
         } else
         {
-            // do nothing at this point
+            // just play the audio again loool
+            playerAudio.Play();
         }
     }
-    #endregion 
+    #endregion
 
+    #region Fire_Logic
     /// <summary>
     /// Disable fires at the beginning of the game.
     /// </summary>
@@ -212,8 +252,9 @@ public class SocketLogic : MonoBehaviour
             fireSource.Play();
         }
     }
+    #endregion
 
-    public IEnumerator FadeSceneChangeWithTimer(string sceneName, float time)
+    public IEnumerator FadeSceneChangeWithTimer(string sceneName, float time = 3)
     {
         Fader.FadeOut(time);
         while (Fader.isFading) yield return null; // wait until fade is complete
