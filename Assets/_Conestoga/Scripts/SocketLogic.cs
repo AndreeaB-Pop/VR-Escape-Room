@@ -24,6 +24,7 @@ public class SocketLogic : MonoBehaviour
     [Header("Difficulty")]
     public GameDifficulty gameDifficulty;
 
+    // These objects will be enabled depending on difficulty
     [Header("Difficulty Objects")]
     [SerializeField]
     GameObject[] easyObjects;
@@ -77,6 +78,7 @@ public class SocketLogic : MonoBehaviour
         SetPuzzleSocketMaxAmount();
         DisableFires();
 
+        // Activate all objects pertaining to a certain difficulty
         switch (gameDifficulty)
         {
             case GameDifficulty.Easy:
@@ -94,10 +96,37 @@ public class SocketLogic : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Change the difficulty of the game.
+    /// </summary>
+    /// <param name="newState">Difficulty, *MUST* match the difficulty enum parameter.</param>
     public void ChangeDifficultyType(string newState)
     {
         gameDifficulty = (GameDifficulty)Enum.Parse(typeof(GameDifficulty), newState);
-        StartCoroutine(FadeSceneChangeWithTimer("AlphaLayout"));
+        StartCoroutine(ChangePuzzleType());
+    }
+
+    IEnumerator ChangePuzzleType()
+    {
+        Fader.FadeOut();
+        while (Fader.isFading) yield return null; // wait until fade is complete
+        // Activate all objects pertaining to a certain difficulty
+        switch (gameDifficulty)
+        {
+            case GameDifficulty.Easy:
+                foreach (var gameObject in easyObjects)
+                    gameObject.SetActive(true);
+                foreach (var gameObject in hardObjects)
+                    gameObject.SetActive(false);
+                break;
+            case GameDifficulty.Hard:
+                foreach (var gameObject in easyObjects)
+                    gameObject.SetActive(false);
+                foreach (var gameObject in hardObjects)
+                    gameObject.SetActive(true);
+                break;
+        }
+        Fader.FadeIn();
     }
 
     #region Socket_Logic
@@ -119,6 +148,11 @@ public class SocketLogic : MonoBehaviour
     }
 
     public static void AddSocketInside() => singleton?.AddSocketIn();
+
+    public void HintTick()
+    {
+        Debug.Log("add a tick to giving hint. will only trigger if correct slots are zero and it hits max");
+    }
 
     /// <summary>
     /// Remove active socket when socket is removed. Ensure it doesn't go under zero at any point.
