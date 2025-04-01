@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// It's called socket logic but it handles most of the game logic overall.
@@ -51,7 +53,7 @@ public class SocketLogic : MonoBehaviour
 
     [SerializeField] AudioSource playerAudio;
     [SerializeField] AudioClip colourHint, keypadHint1, keypadhint2, gameWin;
-    bool hintGiven;
+    public bool hintGiven;
     bool keypadHint1Given;
     bool keypadHint2Given; 
 
@@ -293,5 +295,16 @@ public class SocketLogic : MonoBehaviour
         Fader.FadeOut(time);
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
+    }
+}
+
+[CustomEditor(typeof(SocketLogic))]
+public class MyScriptEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        var myScript = target as SocketLogic;
+        myScript.hintGiven = EditorGUILayout.Toggle("Hello World", true); //Returns true when user clicks
+        GUILayout.Label("This is a Label in a Custom Editor");
     }
 }

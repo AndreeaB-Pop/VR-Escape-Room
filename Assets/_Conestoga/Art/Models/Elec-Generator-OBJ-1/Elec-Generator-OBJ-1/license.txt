@@ -1,0 +1,11 @@
+Model Information:
+* title:	Electric Energy Plant
+* source:	https://sketchfab.com/3d-models/electric-energy-plant-14031c3a23714885b8cb70a506050e61
+* author:	DanixsDesigner (https://sketchfab.com/DanixsDesigner4774)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Electric Energy Plant" (https://sketchfab.com/3d-models/electric-energy-plant-14031c3a23714885b8cb70a506050e61) by DanixsDesigner (https://sketchfab.com/DanixsDesigner4774) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

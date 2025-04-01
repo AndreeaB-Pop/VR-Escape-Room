@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fire Extinguisher
+* source:	https://sketchfab.com/3d-models/fire-extinguisher-68068b0dcc9c45388f958aef24e26c92
+* author:	crow (https://sketchfab.com/crow.bite)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fire Extinguisher" (https://sketchfab.com/3d-models/fire-extinguisher-68068b0dcc9c45388f958aef24e26c92) by crow (https://sketchfab.com/crow.bite) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Generator | Old Test Job
+* source:	https://sketchfab.com/3d-models/generator-old-test-job-e7ab8b4ca60345119c0008e41fc16cdc
+* author:	TadenStar (https://sketchfab.com/tadenstar)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Generator | Old Test Job" (https://sketchfab.com/3d-models/generator-old-test-job-e7ab8b4ca60345119c0008e41fc16cdc) by TadenStar (https://sketchfab.com/tadenstar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,8 @@
+Model Information:
+* title:	future first aid kit
+* source:	https://sketchfab.com/3d-models/future-first-aid-kit-178024fbe4824cc483b9347e74c3c692
+* author:	BarnusModels (https://sketchfab.com/barnusmodels)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Metal Shelf _12MB
+* source:	https://sketchfab.com/3d-models/metal-shelf--12mb-6311b29a437849fb9cfed9105581904b
+* author:	Mehdi Shahsavan (https://sketchfab.com/ahmagh2e)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Metal Shelf _12MB" (https://sketchfab.com/3d-models/metal-shelf--12mb-6311b29a437849fb9cfed9105581904b) by Mehdi Shahsavan (https://sketchfab.com/ahmagh2e) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

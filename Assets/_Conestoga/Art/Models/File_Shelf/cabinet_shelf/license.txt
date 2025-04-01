@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cabinet Shelf with files
+* source:	https://sketchfab.com/3d-models/cabinet-shelf-with-files-ba71f00e19ee423aab446ba94b0544d7
+* author:	bright_moon (https://sketchfab.com/bright_moon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cabinet Shelf with files" (https://sketchfab.com/3d-models/cabinet-shelf-with-files-ba71f00e19ee423aab446ba94b0544d7) by bright_moon (https://sketchfab.com/bright_moon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
