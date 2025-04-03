@@ -1,0 +1,17 @@
+Thank you for purchasing this product!
+
+In this folder are the textures exported for Unity 5 from Substance Painter 2. They are optimized for
+physically based rendering in Unity 5.
+
+Import the model and textures into Unity 5. Then create a new material using the standard shader.
+
+electricalboxes01_unity_AlbedoTransparency goes into the Albedo slot. Also make sure the color swatch next to 'Albedo' is set to pure white.
+electricalboxes01_unity_Occlusion goes into the Occlusion slot.
+electricalboxes01_unity_MetallicSmoothness goes into the Metallic slot.
+electricalboxes01_unity_Normal goes into the Normal slot. For the normal map, make sure the texture type is
+set to 'Normal map.' Do NOT check the checkbox that says 'Create from Grayscale.'
+
+Apply the material onto the mesh and you're ready to go!
+
+I used this video to set up my own Unity 5 test scene. It also explains how PBR works in Unity:
+https://www.youtube.com/watch?v=ypQ_VWWCnv4

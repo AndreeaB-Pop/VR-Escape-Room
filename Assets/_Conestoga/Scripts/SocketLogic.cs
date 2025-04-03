@@ -297,14 +297,3 @@ public class SocketLogic : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 }
-
-[CustomEditor(typeof(SocketLogic))]
-public class MyScriptEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        var myScript = target as SocketLogic;
-        myScript.hintGiven = EditorGUILayout.Toggle("Hello World", true); //Returns true when user clicks
-        GUILayout.Label("This is a Label in a Custom Editor");
-    }
-}

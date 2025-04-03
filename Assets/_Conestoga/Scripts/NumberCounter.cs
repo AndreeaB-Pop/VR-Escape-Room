@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
+[RequireComponent(typeof(TextMeshPro))]
 public class NumberCounter : MonoBehaviour
 {
     public TextMeshPro Text;
