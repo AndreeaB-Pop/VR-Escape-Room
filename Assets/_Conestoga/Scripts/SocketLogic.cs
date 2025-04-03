@@ -53,6 +53,8 @@ public class SocketLogic : MonoBehaviour
 
     [SerializeField] AudioSource playerAudio;
     [SerializeField] AudioClip colourHint, keypadHint1, keypadhint2, gameWin;
+    [SerializeField] GameObject playerXRInteractable;
+    [SerializeField] Transform playerRespawn;
     public bool hintGiven;
     bool keypadHint1Given;
     bool keypadHint2Given; 
@@ -128,6 +130,7 @@ public class SocketLogic : MonoBehaviour
                     gameObject.SetActive(true);
                 break;
         }
+        ResetSocketCount();
         Fader.FadeIn();
     }
 
@@ -290,10 +293,23 @@ public class SocketLogic : MonoBehaviour
     }
     #endregion
 
+    public void RespawnThePlayer()
+    {
+        StartCoroutine(RespawnPlayer());
+    }
+
     public IEnumerator FadeSceneChangeWithTimer(string sceneName, float time = 3)
     {
         Fader.FadeOut(time);
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
+    }
+
+    public IEnumerator RespawnPlayer()
+    {
+        Fader.FadeOut();
+        while (Fader.isFading) yield return null;
+        playerXRInteractable.transform.position = playerRespawn.transform.position;
+        Fader.FadeIn();
     }
 }

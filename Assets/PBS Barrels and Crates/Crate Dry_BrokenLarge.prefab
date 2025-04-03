@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000014239082858}
   - component: {fileID: 54000013087935528}
   - component: {fileID: 64000010532164660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011198831878}
   - component: {fileID: 114000010371957558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Crate Dry_BrokenLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 23000011903383088}
   - component: {fileID: 54000011730043808}
   - component: {fileID: 64000013712258756}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 23000013383188414}
   - component: {fileID: 54000011302267256}
   - component: {fileID: 64000011560293986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 23000012185142790}
   - component: {fileID: 54000011679939526}
   - component: {fileID: 64000010074029328}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 23000010991660860}
   - component: {fileID: 54000013848622574}
   - component: {fileID: 64000014166456520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

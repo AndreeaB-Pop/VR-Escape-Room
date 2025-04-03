@@ -2,7 +2,7 @@
 - Project name: VR Escape Room
 - Unity version: Unity 2022.3.25f1
 - Active game object:
-  - Name: Elevator Inside Floor
+  - Name: Game Logic
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
