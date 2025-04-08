@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -33,6 +34,13 @@ public class SocketLogic : MonoBehaviour
     [SerializeField]
     GameObject[] hardObjects;
 
+    [Header("Elevator Items")]
+    [SerializeField] PlayableDirector elevatorPlayableDirector;
+    [SerializeField] MeshRenderer elevatorEmission;
+    Material elevatorEmissionMaterial;
+    [SerializeField] TextMeshPro countdownText;
+    [SerializeField] AudioSource elevatorAudio;
+
     [Header("Puzzle Logics")]
     [Tooltip("Amount of sockets correctly needed for generator puzzle.")]
     [SerializeField] int generatorPuzzleConnectionAmount = 2;
@@ -54,10 +62,11 @@ public class SocketLogic : MonoBehaviour
     [SerializeField] AudioSource playerAudio;
     [SerializeField] AudioClip colourHint, keypadHint1, keypadhint2, gameWin;
     [SerializeField] GameObject playerXRInteractable;
-    [SerializeField] Transform playerRespawn;
+    public Transform playerRespawn;
     public bool hintGiven;
     bool keypadHint1Given;
-    bool keypadHint2Given; 
+    bool keypadHint2Given;
+    bool canEscapeNow;
 
     // Set singleton
     private void Awake()
@@ -81,6 +90,9 @@ public class SocketLogic : MonoBehaviour
 
         SetPuzzleSocketMaxAmount();
         DisableFires();
+
+        elevatorEmissionMaterial = elevatorEmission.GetComponent<Renderer>().material;
+        elevatorEmissionMaterial.EnableKeyword("_EMISSION");
 
         // Activate all objects pertaining to a certain difficulty
         switch (gameDifficulty)
@@ -147,7 +159,7 @@ public class SocketLogic : MonoBehaviour
                 CheckSocketsCorrect();
                 break;
             case Puzzle.Elevator:
-                // do nothing, the logic will run on the button press
+                CheckSocketsCorrect();
                 break;
         }
     }
@@ -220,10 +232,12 @@ public class SocketLogic : MonoBehaviour
                     playableDirector.Play();
                     break;
                 case Puzzle.Elevator:
+                    elevatorEmissionMaterial.SetColor("_EmissionColor", Color.white);
+                    canEscapeNow = true;
+                    elevatorPlayableDirector.Play();
                     Debug.Log("do elevator resolution things");
-                    StartCoroutine(FadeSceneChangeWithTimer("AlphaLayout", 5));
-                    playerAudio.clip = gameWin;
-                    playerAudio.Play();
+                    //StartCoroutine(FadeSceneChangeWithTimer("AlphaLayout", 5));
+                    
                     break;
             }
             ResetSocketCount();
@@ -231,6 +245,49 @@ public class SocketLogic : MonoBehaviour
         else
         {
             // do nothing
+        }
+    }
+
+    public void EscapeTheArea()
+    {
+        if (canEscapeNow)
+        {
+            elevatorAudio.Play();
+            StartCoroutine(CountdownToStart());
+        } else
+        {
+            Debug.Log("nuh uh, the puzzle isn't done yet.");
+        }
+    }
+
+    IEnumerator CountdownToStart()
+    {
+        float currentTime = 6;
+        while (currentTime > 0)
+        {
+            // Update the countdown display every frame
+            countdownText.text = currentTime.ToString("0");            // Wait for a second
+            yield return new WaitForSeconds(1f);            // Decrease the current time
+            currentTime--;
+        }        // When the countdown is over, 
+        // set the text to indicate the end
+        countdownText.text = "1";
+        elevatorPlayableDirector.Play();
+        playerAudio.clip = gameWin;
+        playerAudio.Play();
+    }
+
+    public void EndTheGame()
+    {
+        // Use the singleton instance of Fader to call the non-static Fade method
+        if (Fader.singleton != null)
+        {
+            StartCoroutine(Fader.singleton.Fade(Color.clear, Color.white, 5f));
+            Application.Quit();
+        }
+        else
+        {
+            Debug.LogError("Fader singleton instance is not set.");
         }
     }
 
@@ -293,6 +350,8 @@ public class SocketLogic : MonoBehaviour
     }
     #endregion
 
+    #region Player_Respawn
+    // This is such a dumb way to respawn, but if it works it works ...
     public void RespawnThePlayer()
     {
         StartCoroutine(RespawnPlayer());
@@ -307,9 +366,16 @@ public class SocketLogic : MonoBehaviour
 
     public IEnumerator RespawnPlayer()
     {
-        Fader.FadeOut();
+        Fader.FadeOut(1f);
         while (Fader.isFading) yield return null;
-        playerXRInteractable.transform.position = playerRespawn.transform.position;
+
+        // Fix for CS0200: Instead of assigning the transform directly, update the position and rotation.
+        playerXRInteractable.transform.position = playerRespawn.position;
+        playerXRInteractable.transform.rotation = playerRespawn.rotation;
+
+        Debug.Log("The player position AFTER being updated is " + playerXRInteractable.transform.position +
+                  " and the respawn position is " + playerRespawn.position);
         Fader.FadeIn();
     }
+    #endregion
 }
