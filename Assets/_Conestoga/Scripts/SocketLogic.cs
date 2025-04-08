@@ -54,7 +54,7 @@ public class SocketLogic : MonoBehaviour
     [SerializeField] AudioSource playerAudio;
     [SerializeField] AudioClip colourHint, keypadHint1, keypadhint2, gameWin;
     [SerializeField] GameObject playerXRInteractable;
-    [SerializeField] Transform playerRespawn;
+    public Transform playerRespawn;
     public bool hintGiven;
     bool keypadHint1Given;
     bool keypadHint2Given; 
@@ -303,6 +303,13 @@ public class SocketLogic : MonoBehaviour
         Fader.FadeOut(time);
         while (Fader.isFading) yield return null; // wait until fade is complete
         SceneManager.LoadScene(sceneName);
+    }
+
+    public static void RespawnPlayerPublic(Transform position) => singleton?.SetRespawnPosition(position);
+
+    public void SetRespawnPosition(Transform position)
+    {
+        playerRespawn = position;
     }
 
     public IEnumerator RespawnPlayer()
