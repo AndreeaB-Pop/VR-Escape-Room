@@ -200,6 +200,7 @@ public class SocketLogic : MonoBehaviour
     public void ChangePuzzleType(string newState)
     {
         activeConnectorPuzzle = (Puzzle)Enum.Parse(typeof(Puzzle), newState);
+        ResetSocketCount();
         SetPuzzleSocketMaxAmount();
     }
 
@@ -256,7 +257,7 @@ public class SocketLogic : MonoBehaviour
             StartCoroutine(CountdownToStart());
         } else
         {
-            Debug.Log("nuh uh, the puzzle isn't done yet.");
+            // Debug.Log("nuh uh, the puzzle isn't done yet.");
         }
     }
 
